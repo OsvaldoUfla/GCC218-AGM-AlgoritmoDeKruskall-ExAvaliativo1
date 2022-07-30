@@ -20,7 +20,7 @@ A primeira linha da entrada consistirá na quantidade de casos de teste a serem 
 Saídas
 Cada caso de teste será impresso em apenas uma linha. Cada linha deve conter dois inteiros, separados por apenas um espaço em branco, que representam os custo de implementação dos dois projetos de infraestrutura energética de menor valor em Hill Valley.
 
-Exemplo de Entrada
+Exemplo de Entrada\
 2\
 5 8\
 1 3 75\
