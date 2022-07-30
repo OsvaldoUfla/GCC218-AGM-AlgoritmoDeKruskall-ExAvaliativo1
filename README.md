@@ -21,32 +21,32 @@ Saídas
 Cada caso de teste será impresso em apenas uma linha. Cada linha deve conter dois inteiros, separados por apenas um espaço em branco, que representam os custo de implementação dos dois projetos de infraestrutura energética de menor valor em Hill Valley.
 
 Exemplo de Entrada
-2
+2\
 5 8\
-1 3 75
-3 4 51
-2 4 19
-3 2 95
-2 5 42
-5 4 31
-1 2 9
-3 5 66
-9 14
-1 2 4
-1 8 8
-2 8 11
-3 2 8
-8 9 7
-8 7 1
-7 9 6
-9 3 2
-3 4 7
-3 6 4
-7 6 2
+1 3 75\
+3 4 51\
+2 4 19\
+3 2 95\
+2 5 42\
+5 4 31\
+1 2 9\
+3 5 66\
+9 14\
+1 2 4\
+1 8 8\
+2 8 11\
+3 2 8\
+8 9 7\
+8 7 1\
+7 9 6\
+9 3 2\
+3 4 7\
+3 6 4\
+7 6 2\
 4 6 14
-4 5 9
-5 6 10
-
-Exemplo de Saída
-110 121
-37 37
+4 5 9\
+5 6 10\
+\
+Exemplo de Saída\
+110 121\
+37 37\
