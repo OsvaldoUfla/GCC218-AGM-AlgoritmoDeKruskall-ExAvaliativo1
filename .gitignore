@@ -31,5 +31,5 @@
 *.out
 *.app
 
-#Diretórios
+# Diretórios
 .vscode/
