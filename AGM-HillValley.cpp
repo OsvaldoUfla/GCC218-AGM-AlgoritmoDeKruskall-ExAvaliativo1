@@ -1,6 +1,3 @@
-#ifndef DEFINICOES_H
-#define DEFINICOES_H
-
 #include<utility>
 #include<vector>
 #include<iostream>
@@ -9,11 +6,6 @@ using namespace std;
 
 typedef pair<int, int> ii; // pares de inteiros
 typedef vector<int> vi; // vetor de inteiros
-
-#endif
-
-#ifndef UFDS_H
-#define UFDS_H
 
 class UFDS
 {
@@ -102,7 +94,6 @@ class UFDS
       // vetor que armazena o rank de cada elemento do conjunto
       vi rank;
 };
-#endif
 
 /* retorna o custo da AGM
  * Parametros:
