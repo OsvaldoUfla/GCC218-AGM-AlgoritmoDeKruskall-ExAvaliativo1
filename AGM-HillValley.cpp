@@ -173,7 +173,4 @@ int main()
     cout << "Custo da AGM: " << kruskall(arestas, n, m, maiorAresta) << endl;
     return 0;
 
-    //
-    //
-    //
 }
