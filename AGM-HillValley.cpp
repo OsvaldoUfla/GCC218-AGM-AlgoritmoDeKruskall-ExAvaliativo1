@@ -101,7 +101,7 @@ class UFDS
  *  n: quantidade de vertices
  *  m: quantidade de arestas
  */
-int kruskall(vector<pair<int, ii>>& arestas, int n, int m,pair<int, ii>& maiorAresta)
+int kruskall(vector<pair<int, ii>>& arestas, int n, int m)
 {
     // ordenacao em O(mlogm), de acordo com https://www.cplusplus.com/reference/algorithm/sort/?kw=sort
     sort(arestas.begin(), arestas.end());
@@ -112,17 +112,17 @@ int kruskall(vector<pair<int, ii>>& arestas, int n, int m,pair<int, ii>& maiorAr
     UFDS ufds(n); // codigo equivalente ao MAKE-SET(v) do pseudocodigo
  
     int u, v;
-    vector<pair<int, ii>> e;    //armazena AGM
+    pair<int, ii> e;
  
     int numero_arestas = 0;
     for(int i = 0; i < m; i++)
     {
-        e.push_back(arestas[i]);
-        u = e[e.size()-1].second.first;
-        v = e[e.size()-1].second.second;
+        e = arestas[i];
+        u = e.second.first;
+        v = e.second.second;
         if(!ufds.mesmoConjunto(u, v))
         {
-            resultado += e[e.size()-1].first;
+            resultado += e.first;
             numero_arestas++;
             if(numero_arestas == n-1)
               break;
@@ -130,9 +130,49 @@ int kruskall(vector<pair<int, ii>>& arestas, int n, int m,pair<int, ii>& maiorAr
             ufds.uniao(u, v);
         }
     }
+ 
+    return resultado;
+}
+
+/* retorna o custo da AGM
+* Armazena AGM
+ * Parametros:
+ *  arestas: lista da arestas
+ *  n: quantidade de vertices
+ *  m: quantidade de arestas
+ * AGM: etrutura para armazenar a AGM
+ */
+int kruskall(vector<pair<int, ii>>& arestas, int n, int m, vector<pair<int, ii>>& AGM)
+{
     // ordenacao em O(mlogm), de acordo com https://www.cplusplus.com/reference/algorithm/sort/?kw=sort
-    sort(e.begin(), e.end());
-    maiorAresta = e[0];    //armazena a aresta de maior peso da AGM
+    sort(arestas.begin(), arestas.end());
+ 
+    // custo da AGM
+    int resultado = 0;
+ 
+    UFDS ufds(n); // codigo equivalente ao MAKE-SET(v) do pseudocodigo
+ 
+    int u, v;
+    pair<int, ii> e;
+ 
+    int numero_arestas = 0;
+    for(int i = 0; i < m; i++)
+    {
+        e = arestas[i];
+        u = e.second.first;
+        v = e.second.second;
+        if(!ufds.mesmoConjunto(u, v))
+        {
+            AGM.push_back(e);    //armazena na AGM
+            resultado += e.first;
+            numero_arestas++;
+            if(numero_arestas == n-1)
+              break;
+         
+            ufds.uniao(u, v);
+        }
+    }
+    
 
     return resultado;
 }
@@ -152,11 +192,23 @@ int BuscaAGM(vector<pair<int, ii>>& arestas, pair<int, ii> busca)
     return -1;
 }
 
+bool comparaTupla(pair<int, ii> a, pair<int, ii> b)
+{
+    if((a.first == b.first) and 
+    (a.second.first == b.second.first) and 
+    (a.second.second == b.second.second))
+    {
+        return true;
+    }
+    return false;
+}
+
 int main()
 {
     // lista de arestas: compostos por uma tripla (peso, (u,v))
     vector<pair<int, ii>> arestas;
-    pair<int, ii> maiorAresta; //aresta de maior valor na AGM
+    vector<pair<int, ii>> arestas2;
+    vector<pair<int, ii>> AGM; //aresta da AGM
     int n, m; // numero de vertices e numero de arestas
     cin >> n >> m;
  
@@ -167,9 +219,20 @@ int main()
         arestas.push_back(make_pair(w, ii(u, v)));
     }
  
-    cout << "Custo da AGM: " << kruskall(arestas, n, m, maiorAresta) << endl;
-    arestas.erase(arestas.begin() + BuscaAGM(arestas, maiorAresta));
-    m--;
-    cout << "Custo da AGM: " << kruskall(arestas, n, m, maiorAresta) << endl;
+    cout << "Custo da AGM: " << kruskall(arestas, n, m, AGM) << endl;
+
+    for(int i=0 ; i< arestas.size() ; i++)
+    {
+        for(int j=0 ; j < arestas.size() ; j++)
+        {
+            if(!comparaTupla(arestas[i], arestas[j]))
+            {
+                arestas2.push_back(arestas[j]);
+            }
+        }
+        cout << "Custo da AGM: " << kruskall(arestas2, n, m -1) << endl;
+        arestas2.clear();
+    }
+
     return 0;
 }
